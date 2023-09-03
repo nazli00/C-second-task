@@ -1,0 +1,60 @@
+using System;
+
+class Quiz
+{
+    static void Main()
+    {
+        string[] questions = {
+            "What is the capital of Azerbaijan?",
+            "Which city is known as the 'City of Winds'?",
+            "What is the largest city in Turkey?",
+        };
+
+        string[][] answers = {
+            new string[] { "Baku", "Ganja", "Sumgayit" },
+            new string[] { "Ganja", "Baku", "Lankaran" },
+            new string[] { "Istanbul", "Ankara", "Izmir" },
+        };
+
+        string[] correctAnswers = { "Baku", "Baku", "Istanbul" };
+
+        int score = 0;
+
+        for (int i = 0; i < questions.Length; i++)
+        {
+            Console.WriteLine($"\nQuestion {i + 1}: {questions[i]}");
+
+            for (int j = 0; j < answers[i].Length; j++)
+            {
+                Console.WriteLine($"{j + 1}) {answers[i][j]}");
+            }
+
+            Console.Write("Your answer (1, 2, or 3): ");
+            int userChoice = int.Parse(Console.ReadLine());
+
+            if (userChoice >= 1 && userChoice <= answers[i].Length)
+            {
+                if (answers[i][userChoice - 1] == correctAnswers[i])
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Correct!\n");
+                    Console.ResetColor();
+                    score += 10;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Incorrect!\n");
+                    Console.ResetColor();
+                }
+            }
+        }
+
+        if (score < 0)
+        {
+            score = 0;
+        }
+
+        Console.WriteLine($"Your score: {score} out of {questions.Length * 10}");
+    }
+}
